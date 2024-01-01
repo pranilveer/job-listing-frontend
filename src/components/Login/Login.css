@@ -1,0 +1,108 @@
+.login_page {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.login_page_left {
+    height: 100vh;
+    width: 55vw;
+    display: flex;
+    flex-direction: column;
+    gap: 8vh;
+    align-items: center;
+}
+
+.login_page_right {
+    height: 100vh;
+    width: 45vw;
+    background-image: url("../../assets/images/userPageImage.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.login_page_right > h1{
+    color: white;
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.login_title {
+    width: 35vw;
+    margin-top: 10vh;
+    text-align: left;
+}
+
+.login_form {
+    width: 35vw;
+    display: flex;
+    flex-direction: column;
+    gap: 5vh;
+}
+
+.login_form>input {
+    width: 35vw;
+    height: 8vh;
+    border-radius: 1vh;
+    border-color: grey;
+    font-size: 2.5vh;
+    padding: 0 1rem;
+}
+
+.login_footer {
+    display: flex;
+    width: 35vw;
+    flex-direction: column;
+    gap: 2vh;
+    align-items: flex-start;
+}
+
+.signin_btn {
+    align-self: left;
+    background-color: #ed5353;
+    border: none;
+    border-radius: 1vh;
+    color: white;
+    font-size: 2.5vh;
+    font-weight: 700;
+    height: 7vh;
+    width: 15vw;
+}
+
+@media screen and (max-width: 650px) and (min-width: 250px) {
+    .login_page_left {
+        height: 100vh;
+        width: 100vw;
+    }
+
+    .login_page_right {
+        display: none;
+    }
+
+    .login_title {
+        width: 80vw;
+        margin-top: 2vh;
+        text-align: center;
+    }
+
+    .login_form {
+        width: 80vw;
+        gap: 2vh;
+    }
+
+    .login_form>input {
+        width: 70vw;
+        height: 7vh;
+    }
+
+    .login_footer {
+        width: 80vw;
+        align-items: center;
+    }
+
+    .signin_btn {
+        width: 50vw;
+    }
+}
