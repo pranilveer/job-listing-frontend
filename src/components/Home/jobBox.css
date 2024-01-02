@@ -1,0 +1,112 @@
+.jobBox_container {
+    height: 18vh;
+    width: 80vw;
+    margin: 5vw auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  -webkit-box-shadow: 0px 0px 21px 5px rgba(224, 13, 55, 0.58);
+  -moz-box-shadow: 0px 0px 21px 5px rgba(224, 13, 55, 0.58);
+  box-shadow: 0px 0px 21px 5px rgba(224, 13, 55, 0.58);
+}
+
+.job_left_component{
+    height: 100%;
+    width: 25vw;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.company_logo > img{
+    height: 5vh;
+    width: auto;
+    margin-bottom: 8vh;
+}
+
+.second_div{
+    height: 100%;
+    width: 25vw;
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    color: #9C9C9C;
+    font-weight: 600;
+}
+
+.second_div_text > span:first-of-type{
+    margin-right: 2vh;
+}
+
+.second_div_footer{
+    font-weight: 500;
+    color: rgba(224, 13, 55);
+}
+
+.second_div_footer > span:first-of-type{
+    margin-right: 4vh;
+}
+
+.third_div{
+    height: 100%;
+    width: 20vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.third_div > img{
+    height: 5vh;
+    width: 5vh;
+}
+
+.third_div > span{
+    font-size: 3vh;
+    font-weight: 500;
+    margin-bottom: 0.5vh;
+    color: #9C9C9C;
+}
+
+.job_right_content{
+    height: 100%;
+    width: 40vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.job_right_upper{
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.job_right_upper > span{
+    height: 3vh;
+    width: 12vw;
+    padding: 1vh 2vw;
+    background-color: #FFEEEE;
+    margin: 1vh;
+    font-weight: 600;
+}
+
+.job_right_lower{
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.job_right_lower > button {
+    height: 6vh;
+    width: 10vw;
+    border: none;
+    border-radius: 1vh;
+    background-color: #ED5353;
+    color: white;
+    font-weight: 600;
+    font-size: 2.5vh;
+}

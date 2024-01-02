@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "./Header";
-import jobBox from "./jobBox";
-import jobSearch from "./jobSearch";
+import JobSearch from "./jobSearch";
+import JobContainer from "./jobContainer"
+import JobDetails from "./jobDetails"
 
 const Home = () =>{
+    const [showDetails, setShowDetails] = useState(true);
     return (
         <div className="home">
             <Header />
-            <jobBox />
-            <jobSearch />
+            {showDetails? ( <JobDetails /> ) : 
+            (<>
+            <JobSearch />
+            <JobContainer />
+            </>)}
         </div>
     )
 }
