@@ -17,8 +17,8 @@
     margin-bottom: 5vh;
     padding-top: 2vh;
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
     background-color: white;
     -webkit-box-shadow: 0px 0px 21px 5px rgba(224, 13, 55, 0.58);
     -moz-box-shadow: 0px 0px 21px 5px rgba(224, 13, 55, 0.58);
@@ -54,6 +54,7 @@
     margin-left: 2vw;
     margin-right: 2vw;
     margin-top: 2vh;
+    gap: 0.5vw;
   }
   
   .job__details__second__section {

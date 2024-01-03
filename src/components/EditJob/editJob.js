@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
-import "./AddJob.css";
+import React, { useEffect, useState } from "react";
+import "./editJob.css";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 
-const AddJob = () => {
+const EditJob = () => {
+  const navigate = useNavigate();
+  const { id } = useParams();
+  console.log("id", id);
   const [companyName, setCompanyName] = useState("");
   const [addLogoURL, setAddLogoURL] = useState("");
   const [jobPosition, setJobPosition] = useState("");
@@ -16,11 +20,44 @@ const AddJob = () => {
   const [aboutCompany, setAboutCompany] = useState("");
   const [skillsRequired, setSkillsRequired] = useState([]);
 
- const navigate = useNavigate();
+  useEffect(() => {
+    axios
+      .get(`http://localhost:4000/jobs/${id}`)
+      .then((response) => {
+        console.log("response", response.data.jobListing);
+        setCompanyName(response.data.jobListing.companyName);
+        setAddLogoURL(response.data.jobListing.addLogoURL);
+        setJobPosition(response.data.jobListing.jobPosition);
+        setMonthlySalary(response.data.jobListing.monthlySalary);
+        setJobType(response.data.jobListing.jobType);
+        setRemoteOnsite(response.data.jobListing.remoteOnsite);
+        setJobLocation(response.data.jobListing.jobLocation);
+        setJobDescription(response.data.jobListing.jobDescription);
+        setAboutCompany(response.data.jobListing.aboutCompany);
+        setSkillsRequired(response.data.jobListing.skillsRequired);
+      })
+      .catch((error) => {
+        console.error("Job posting failed", error);
+        navigate("/login");
+      });
+  }, [id,navigate]);
+
+  const handleJobTypeChange = (e) => {
+    setJobType(e.target.value);
+  };
+
+  const handleRemoteOnsiteChange = (e) => {
+    setRemoteOnsite(e.target.value);
+  };
+
+  const handleSkillsChange = (e) => {
+    const skills = e.target.value.split(",").map((skill) => skill.trim());
+    setSkillsRequired(skills);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    console.log(localStorage.getItem("token"));
     // Prepare the data to be sent in the POST request
     const postData = {
       companyName,
@@ -37,7 +74,7 @@ const AddJob = () => {
 
     // Send the POST request
     axios
-      .post("http://localhost:4000/job-posting", postData, {
+      .put(`http://localhost:4000/job-posting/${id}`, postData, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
@@ -54,50 +91,62 @@ const AddJob = () => {
         setMonthlySalary("");
         setRemoteOnsite("");
         setSkillsRequired([]);
+
         // Handle any success response if needed
-        toast.success("Job posted successfully!", {
+        toast.success("Job Updated Successfully", {
           position: "top-center",
           autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
         });
         setTimeout(() => {
           navigate("/");
         }, 2000);
       })
       .catch((error) => {
-        console.error("Job posting failed", error);
-        // Handle any error response if needed
+        if (error.response.status === 401) {
+          toast.error("Unauthorized Access. Redirecting to home page", {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          localStorage.clear();
+          setTimeout(() => {
+            navigate("/");
+          }, 2000);
+          return;
+        }
+
+        toast.error("Job Update Failed. Redirecting to home page", {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
       });
-    console.log(postData);
   };
 
-  const handleJobTypeChange = (e) => {
-    setJobType(e.target.value);
+  const cancelUpdate = () => {
+    navigate("/");
   };
-
-  const handleRemoteOnsiteChange = (e) => {
-    setRemoteOnsite(e.target.value);
-  };
-
-  const handleSkillsChange = (e) => {
-    const skills = e.target.value.split(",").map((skill) => skill.trim());
-    setSkillsRequired(skills);
-  };
-
-  const cancelAddJob = () => {
-    toast.error("Job posting cancelled!", {
-      position: "top-center",
-      autoClose: 2000,
-    });
-    setTimeout(() => {
-      navigate("/");
-    }, 2000);
-  };
-
 
   return (
-    <div className="add_job">
-      <div className="add_job_left">
-        <h1>Add Job</h1>
+    <div className="edit_job">
+      <div className="edit_job_left">
+        <h1>Edit Job</h1>
         <form className="job_form" onSubmit={handleSubmit}>
           <div className="job_input">
             <label htmlFor="companyName">Company Name</label>
@@ -189,19 +238,21 @@ const AddJob = () => {
             />
           </div>
           <div className="job_buttons">
-            <button className="cancel_addJob" onClick={cancelAddJob}>
+            <button onClick={cancelUpdate} className="cancel_updateJob">
               Cancel
             </button>
-            <button type="submit" className="add_job_button">
-              + Add Job
+            <button type="submit" className="update_job_button">
+              Update
             </button>
           </div>
         </form>
       </div>
-      <div className="add_job_right">
-        <h1>Recruiters add Job details here</h1>
+      <div className="edit_job_right">
+        <h1>Recruiters edit Job details here</h1>
       </div>
+      <ToastContainer />
     </div>
   );
 };
-export default AddJob;
+
+export default EditJob;

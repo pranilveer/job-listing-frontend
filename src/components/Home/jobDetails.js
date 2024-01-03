@@ -1,29 +1,49 @@
-import React from "react";
-import "./JobDetails.css";
+import React, { useEffect, useState } from "react";
+import "./jobDetails.css";
 import duration from "../../assets/icons/duration.png";
 import stipend from "../../assets/icons/stipend.png";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import moment from "moment";
+import { useNavigate } from "react-router-dom";
+import useJobContext from "../../hooks/useJobContext";
 
 const JobDetails = () => {
+    const { id } = useParams();
+    const [jobDetails, setJobDetails] = useState({});
+    const navigate = useNavigate();
+    const { loggedIn } = useJobContext();
+
+    useEffect(() => {
+        axios.get("http://localhost:4000/jobs/" + id).then((response) => {
+            setJobDetails(response.data.jobListing);
+            console.log("response", response.data.jobListing);
+        });
+    }, [id]);
+
+    const getJobDetails = () => {
+        navigate(`/editjob/${id}`);
+    };
+
     return (
         <div className="job__details__container">
             <div className="job__details__upper">
                 <span>
-                    JobVariable remote(work from home) else inOffice Job/internship at
-                    Variable(company Name).
+                    {`${jobDetails.jobPosition} ${jobDetails.remoteOnsite === "remote" ? "remote" : "In office"
+                        } ${jobDetails.jobType} Job/internship at ${jobDetails.companyName}`}
                 </span>
             </div>
             <div className="job__details__lower">
                 <div className="job__details__first__section">
-                    <span>1w ago</span>
+                    <span>{moment(new Date(jobDetails.createdAt)).fromNow()}</span>
                     <span>.</span>
-                    <span>Full Time</span>
+                    <span>{jobDetails.jobType}</span>
                 </div>
                 <div className="job__details__second__section">
-                    <span>Wordpress Developement</span>
-                    <button>Edit Job</button>
-                </div>
+                    <span>{jobDetails.companyName}</span>
+                    {loggedIn && <button onClick={getJobDetails}>Edit Job</button>}                </div>
                 <div className="job__details__third__section">
-                    <span>Banglore</span>
+                    <span>{jobDetails.jobLocation}</span>
                     <span>|</span>
                     <span>India</span>
                 </div>
@@ -34,7 +54,7 @@ const JobDetails = () => {
                             <span>Stipend</span>
                         </div>
                         <div className="job__details__fourth__section__left__second">
-                            <span> Rs 25000/month</span>
+                            <span> Rs {jobDetails.monthlySalary}/month</span>
                         </div>
                     </div>
                     <div className="job__details__fourth__section__right">
@@ -49,71 +69,18 @@ const JobDetails = () => {
                 </div>
                 <div className="job__details__fifth__section">
                     <h1>About Company</h1>
-                    <p>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting
-                        industry. Lorem Ipsum has been the industry's standard dummy text
-                        ever since the 1500s, when an unknown printer took a galley of type
-                        and scrambled it to make a type specimen book. It has survived not
-                        only five centuries, but also the leap into electronic typesetting,
-                        remaining essentially unchanged. It was popularised in the 1960s
-                        with the release of Letraset sheets containing Lorem Ipsum passages,
-                        and more recently with desktop publishing software like Aldus
-                        PageMaker including versions of Lorem Ipsum.
-                    </p>
+                    <p>{jobDetails.aboutCompany}</p>
                 </div>
                 <div className="job__details__sixth__section">
                     <h1>About the job/internship</h1>
-                    <p>
-                        Job Description: MERN Stack Developer We are seeking a skilled and
-                        passionate MERN Stack Developer to join our dynamic team at
-                        [Company/Organization Name]. As a MERN Stack Developer, you will be
-                        responsible for developing and maintaining high-quality web
-                        applications using the MERN (MongoDB, Express.js, React.js, Node.js)
-                        stack. You will collaborate closely with our cross-functional team
-                        to design, develop, and deploy innovative solutions that meet our
-                        clients' business needs. Responsibilities: - Participate in the
-                        entire software development lifecycle, including design, coding,
-                        testing, and deployment of MERN stack applications. - Develop
-                        user-friendly web applications using React.js, ensuring responsive
-                        and efficient UI/UX. - Implement RESTful APIs using Node.js and
-                        Express.js to connect the front-end with back-end services and
-                        databases. - Design and optimize MongoDB databases to store and
-                        retrieve data efficiently. - Collaborate with designers, product
-                        managers, and other developers to translate business requirements
-                        into technical solutions. - Write clean, maintainable, and efficient
-                        code following best practices and coding standards. - Conduct
-                        thorough testing and debugging of applications to ensure
-                        high-quality deliverables. - Stay updated with the latest trends and
-                        advancements in MERN stack development and incorporate them into our
-                        projects. - Troubleshoot and resolve software defects and issues
-                        reported by clients or internal teams. - Collaborate with the DevOps
-                        team to ensure smooth deployment and release management of
-                        applications. Requirements: - Bachelor's degree in Computer Science,
-                        Software Engineering, or a related field (or equivalent work
-                        experience). - Proven experience as a MERN Stack Developer or
-                        similar role, with a strong portfolio of web development projects. -
-                        Proficiency in front-end development using React.js, HTML, CSS, and
-                        JavaScript. - Strong knowledge of server-side JavaScript frameworks
-                        like Node.js and Express.js. - Solid understanding of MongoDB and
-                        database design principles. - Experience with version control
-                        systems (e.g., Git) and agile development methodologies. -
-                        Familiarity with cloud platforms (e.g., AWS, Azure) and deployment
-                        tools (e.g., Docker, Kubernetes) is a plus. - Strong problem-solving
-                        skills and ability to work in a fast-paced, collaborative
-                        environment. - Excellent communication and teamwork skills, with the
-                        ability to effectively convey technical concepts to both technical
-                        and non-technical stakeholders. Join our innovative and driven team
-                        of professionals, where you will have the opportunity to contribute
-                        to cutting-edge projects and make a significant impact. Apply now
-                        and be part of our exciting journey as we revolutionize the world of
-                        web development using the MERN stack. Note: Please include a link to
-                        your portfolio or any relevant work samples along with your
-                        application. Only shortlisted candidates will be contacted.
-                    </p>
+                    <p>{jobDetails.jobDescription}</p>
                 </div>
                 <div className="job__details__seventh__section">
                     <h1>Skill(s) Required</h1>
-                    <p>HTML CSS JavaScript MongoDB Node.js Express.js ReactJS</p>
+                    {jobDetails.skillsRequired?.map((skill) => {
+                        console.log(skill);
+                        return <p>{skill}</p>
+                    })}
                 </div>
                 <div className="job__details__eighth__section">
                     <h1>Additional Information</h1>

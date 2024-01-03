@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./Login.css"
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -26,11 +28,18 @@ const Login = () => {
                 password,
             })
             .then((response) => {
-                console.log("Login successful", response.data, response.status);
                 localStorage.setItem("name", response.data.name);
                 localStorage.setItem("token", response.data.token);
+                navigate("/");
             })
             .catch((error) => {
+                toast.error("Incorrect Email or Password. Try again.", {
+                    position: "top-center",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    draggable: true,
+                });
                 console.error("Login failed", error);
             });
     };
@@ -57,6 +66,7 @@ const Login = () => {
             <div className="login_page_right">
                 <h1>Your Personal Job Finder</h1>
             </div>
+            <ToastContainer />
         </div>
     )
 }

@@ -1,4 +1,4 @@
-.header{
+.header {
     height: 15vh;
     background-image: url("../../assets/images/headerImage.png");
     background-repeat: no-repeat;
@@ -11,7 +11,7 @@
     border-radius: 0 0 8vh 8vh;
 }
 
-.header_title{
+.header_title {
     color: white;
     font-size: 2rem;
     font-size: 700;
@@ -19,7 +19,7 @@
     margin-left: 2vw;
 }
 
-.header_buttons{
+.header_buttons {
     display: flex;
     justify-content: space-around;
     gap: 2vw;
@@ -27,7 +27,8 @@
     margin-right: 2vw;
 }
 
-.header_login, .header_register{
+.header_login,
+.header_register {
     height: 6vh;
     width: 9vw;
     font-weight: 600;
@@ -43,56 +44,90 @@
     background: transparent;
     border: 2px solid white;
     color: white;
-  }
-  
-  .header_register {
+}
+
+.header_register {
     background-color: white;
     color: #ed5353;
     border: 1px solid white;
+}
+
+.user_icon{
+    height: 10vh;
+    width: 28vw;
+    margin-right: 2vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .user_icon > button {
+    color: white;
+    font-weight: 600;
+    font-size: 1.6rem;
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+  
+  .user_icon > img{
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+  }
+  
+  .user_icon > span {
+    font-weight: 600;
+    font-size: 1.6rem;
+    font-family: 'Lucida Sans';
+    color: white;
   }
 
-  @media screen and (max-width :1000px )and (min-width:600px) {
-    .header{
+@media screen and (max-width :1000px)and (min-width:600px) {
+    .header {
         height: 15vh;
         background-repeat: no-repeat;
         gap: 30vw;
     }
-    
-  }
 
-  @media screen and (max-width :600px )and (min-width:400px) {
-    .header{
+}
+
+@media screen and (max-width :600px)and (min-width:400px) {
+    .header {
         height: 15vh;
         background-repeat: no-repeat;
         gap: 3vw;
     }
 
-    .header_login, .header_register{
+    .header_login,
+    .header_register {
         height: 4vh;
         width: 14vw;
         font-weight: 500;
         font-size: 1rem;
     }
-    
-  }
 
-  @media screen and (max-width :400px )and (min-width:300px) {
-    .header{
+}
+
+@media screen and (max-width :400px)and (min-width:300px) {
+    .header {
         height: 12vh;
         background-repeat: no-repeat;
         gap: 3vw;
     }
 
-    .header_login, .header_register{
+    .header_login,
+    .header_register {
         height: 4vh;
         width: 14vw;
         font-size: 0.8rem;
     }
 
-    .header_title{
+    .header_title {
         font-size: 1.5rem;
         font-size: 700;
         font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     }
-    
-  }
+
+}

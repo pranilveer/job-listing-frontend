@@ -1,35 +1,38 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import "./jobSearch.css"
 import searchIcon from "../../assets/icons/searchIcon.png"
+import useJobContext from "../../hooks/useJobContext";
+import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+import debounce from "lodash.debounce";
+import skills from "../../constants/skillOptions";
 
 
 const JobSearch = () => {
-    const [options, setOptions] = useState([
-        "JS",
-        "HTML",
-        "CSS",
-        "ReactJS",
-        "NodeJS",
-        "Python",
-      ]);
 
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedSkills, setSelectedSkills] = useState([]);
-  
+    const { loggedIn, setJobListings } = useJobContext();
+    const navigate = useNavigate();
+
     const handleSearchChange = (e) => {
-      setSearchTerm(e.target.value);
+        setSearchTerm(e.target.value);
+        getJobListings(searchTerm, selectedSkills);
     };
-  
+
     const handleSelectChange = (e) => {
-      const skill = e.target.value;
-      if (skill && !selectedSkills.includes(skill)) {
-        setSelectedSkills([...selectedSkills, skill]);
-      }
+        const skill = e.target.value;
+        if (skill && !selectedSkills.includes(skill)) {
+            const updatedSkills = [...selectedSkills, skill];
+            setSelectedSkills(updatedSkills);
+            getJobListings(searchTerm, updatedSkills);
+        }
     };
-  
+
     const handleRemoveSkill = (skill) => {
-      const updatedSkills = selectedSkills.filter((s) => s !== skill);
-      setSelectedSkills(updatedSkills);
+        const updatedSkills = selectedSkills.filter((s) => s !== skill);
+        setSelectedSkills(updatedSkills);
+        getJobListings(searchTerm, updatedSkills);
     };
 
     const handleSearchSubmit = (e) => {
@@ -37,6 +40,27 @@ const JobSearch = () => {
         console.log("Search Term:", searchTerm);
         console.log("Selected Skills:", selectedSkills);
     }
+
+    const addJobButton = () => {
+        navigate("/addJob");
+    };
+
+    const getJobListings = useCallback(debounce((_searchTerm, _selectedSkills) => {
+        axios
+            .get(`http://localhost:4000/jobs`, {
+                params: {
+                    searchTerm: _searchTerm,
+                    skills: _selectedSkills.join(","),
+                }
+            })
+            .then((response) => {
+                setJobListings(response.data.jobListings);
+            })
+            .catch((error) => {
+                console.error("Error fetching data: ", error);
+            });
+    }, 200), []);
+
     return (
         <div className="job_search">
             <form className="search_form" onSubmit={{ handleSearchSubmit }}>
@@ -49,8 +73,8 @@ const JobSearch = () => {
                 <div className="select_skills">
                     <select value={selectedSkills} onChange={handleSelectChange}>
                         <option value="">Select Skill</option>
-                        {options.map((option, index) => {
-                            return <option key={index}>{option}</option>;
+                        {skills.map((skill, index) => {
+                            return <option key={index}>{skill}</option>;
                         })}
                     </select>
                 </div>
@@ -62,6 +86,12 @@ const JobSearch = () => {
                         </div>
                     ))}
                 </div>
+
+                {loggedIn && (
+                    <button className="add_job_btn" onClick={addJobButton}>
+                        + Add Job
+                    </button>
+                )}
             </div>
         </div>
     )
