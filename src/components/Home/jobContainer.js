@@ -3,20 +3,23 @@ import "./jobContainer.css"
 import JobBox from './jobBox'
 import useJobContext from "../../hooks/useJobContext";
 import NoResultsFound from "./NoResultsFound";
+import Loading from "../Loading/Loading";
 
 const JobContainer = () => {
-  const { jobListings } = useJobContext();
+  const { jobListings, loading } = useJobContext();
 
   return (
     <div>
-      {jobListings.length < 1 ? (
-               <NoResultsFound />
-      ) : (
-        <div>
-          {jobListings.map((job) => {
-            return <JobBox key={job._id} job={job} />;
-          })}
+      {loading ? (
+        <Loading />
+      ) : jobListings.length > 0 ? (
+        <div className="jobContainer">
+          {jobListings.map((job) => (
+            <JobBox key={job._id} job={job} />
+          ))}
         </div>
+      ) : (
+        <NoResultsFound />
       )}
     </div>
   )

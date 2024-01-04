@@ -3,25 +3,26 @@ import { createContext, useState } from "react";
 const JobContext = createContext({
   loggedIn: false,
   setLoggedIn: () => { },
-  showDetails: false,
-  setShowDetails: () => { },
+  loading: false,
+  setLoading: () => {},
 });
 
 const Provider = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(false);
-  const [showDetails, setShowDetails] = useState(false);
   const [jobListings, setJobListings] = useState([]);
   const [jobId, setJobId] = useState("");
+  const [loading, setLoading] = useState(false);
+
 
   const valueToShare = {
     loggedIn,
     setLoggedIn,
-    showDetails,
-    setShowDetails,
     jobListings,
     setJobListings,
     jobId,
     setJobId,
+    loading,
+    setLoading,
   };
 
   return (

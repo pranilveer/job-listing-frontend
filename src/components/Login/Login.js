@@ -9,6 +9,8 @@ import BASEURL from "../../constants/baseurl";
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(false);
+
     const navigate = useNavigate();
     const signupRedirect = () => {
         navigate("/register")
@@ -23,6 +25,7 @@ const Login = () => {
     };
 
     const login = () => {
+        setLoading(true);
         axios
             .post(`${BASEURL}/login`, {
                 email,
@@ -42,6 +45,9 @@ const Login = () => {
                     draggable: true,
                 });
                 console.error("Login failed", error);
+            })
+            .finally(() => {
+                setLoading(false);
             });
     };
 
@@ -57,7 +63,7 @@ const Login = () => {
                     <input value={password} onChange={handlePassword} type="passowrd" placeholder="Password" />
                 </div>
                 <div className="login_footer">
-                    <button className="signin_btn" onClick={login}>Sign In</button>
+                    <button className="signin_btn" onClick={login} disabled={loading}>{loading ? "Loading..." : "Sign In"}</button>
                     <div className="login_footer_text">
                         <span>Don't have an account? </span>
                         <u onClick={signupRedirect}> Sign Up</u>
