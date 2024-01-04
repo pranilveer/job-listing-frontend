@@ -8,6 +8,7 @@ import Header from './components/Home/Header';
 import JobDetails from './components/Home/jobDetails';
 import EditJob from "./components/EditJob/editJob"
 import Error404 from "./components/NotFound/Error404";
+import Health from "./components/Health/Health";
 import { Provider } from "./context/JobContext";
 
 function App() {
@@ -17,19 +18,20 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={
-                <>
-                  <Header />
-                  <Home />
-                </>
-              }
+              <>
+                <Header />
+                <Home />
+              </>
+            }
             />
             <Route path="/:id" element={
-                <>
-                  <Header />
-                  <JobDetails />
-                </>
-              }
+              <>
+                <Header />
+                <JobDetails />
+              </>
+            }
             />
+            <Route path="/health" element={<Health />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/addJob" element={<AddJob />} />

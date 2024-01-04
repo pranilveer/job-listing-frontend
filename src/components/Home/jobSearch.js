@@ -65,7 +65,7 @@ const JobSearch = () => {
             .catch((error) => {
                 console.error("Error fetching data: ", error);
             });
-    }, 100), []);
+    }, 200), []);
 
     return (
         <div className="job_search">
