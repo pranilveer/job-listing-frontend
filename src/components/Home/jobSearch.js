@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import debounce from "lodash.debounce";
 import skills from "../../constants/skillOptions";
+import BASEURL from "../../constants/baseurl";
 
 
 const JobSearch = () => {
@@ -47,7 +48,7 @@ const JobSearch = () => {
 
     const getJobListings = useCallback(debounce((_searchTerm, _selectedSkills) => {
         axios
-            .get(`http://localhost:4000/jobs`, {
+            .get(`${BASEURL}/jobs`, {
                 params: {
                     searchTerm: _searchTerm,
                     skills: _selectedSkills.join(","),
@@ -82,10 +83,18 @@ const JobSearch = () => {
                     {selectedSkills.map((skill) => (
                         <div className="selected_skill" key={skill}>
                             {skill}
-                            <span className="remove_skill" onClick={() => handleRemoveSkill(skill)} > &times;</span>
+                            <button className="remove_skill" onClick={() => handleRemoveSkill(skill)} >X</button>
                         </div>
                     ))}
                 </div>
+                {selectedSkills.length > 0 && (
+                    <button
+                        className="clear__skills"
+                        onClick={() => setSelectedSkills([])}
+                    >
+                        Clear
+                    </button>
+                )}
 
                 {loggedIn && (
                     <button className="add_job_btn" onClick={addJobButton}>

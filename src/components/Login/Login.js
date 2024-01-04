@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import BASEURL from "../../constants/baseurl";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -23,7 +24,7 @@ const Login = () => {
 
     const login = () => {
         axios
-            .post("http://localhost:4000/login", {
+            .post(`${BASEURL}/login`, {
                 email,
                 password,
             })

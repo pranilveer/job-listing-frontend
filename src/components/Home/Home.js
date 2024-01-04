@@ -4,19 +4,19 @@ import JobSearch from "./jobSearch";
 import JobContainer from "./jobContainer"
 import useJobContext from "../../hooks/useJobContext";
 import axios from "axios";
+import BASEURL from "../../constants/baseurl";
 
 const Home = () => {
     const { loggedIn, setLoggedIn, setJobListings } = useJobContext();
 
     useEffect(() => {
         localStorage.getItem("token") ? setLoggedIn(true) : setLoggedIn(false);
-        console.log(loggedIn);
     }, [loggedIn, setLoggedIn]);
 
     const getJobListings = () => {
         axios
-            .get("http://localhost:4000/jobs")
-            .then((response) => {
+        .get(`${BASEURL}/jobs`)
+        .then((response) => {
                 setJobListings(response.data.jobListings);
             })
             .catch((error) => {

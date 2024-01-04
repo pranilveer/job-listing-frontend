@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import useJobContext from "../../hooks/useJobContext";
+import BASEURL from "../../constants/baseurl";
 
 const JobDetails = () => {
     const { id } = useParams();
@@ -15,10 +16,15 @@ const JobDetails = () => {
     const { loggedIn } = useJobContext();
 
     useEffect(() => {
-        axios.get("http://localhost:4000/jobs/" + id).then((response) => {
-            setJobDetails(response.data.jobListing);
-            console.log("response", response.data.jobListing);
-        });
+        axios
+            .get(`${BASEURL}/jobs/` + id)
+            .then((response) => {
+                setJobDetails(response.data.jobListing);
+            })
+            .catch((error) => {
+                console.error("Error fetching data: ", error);
+                navigate("/404");
+            })
     }, [id]);
 
     const getJobDetails = () => {
@@ -79,7 +85,7 @@ const JobDetails = () => {
                     <h1>Skill(s) Required</h1>
                     {jobDetails.skillsRequired?.map((skill) => {
                         console.log(skill);
-                        return <p>{skill}</p>
+                        return <span>{skill}</span>
                     })}
                 </div>
                 <div className="job__details__eighth__section">

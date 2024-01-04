@@ -4,255 +4,255 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import BASEURL from "../../constants/baseurl";
 
 const EditJob = () => {
-  const navigate = useNavigate();
-  const { id } = useParams();
-  console.log("id", id);
-  const [companyName, setCompanyName] = useState("");
-  const [addLogoURL, setAddLogoURL] = useState("");
-  const [jobPosition, setJobPosition] = useState("");
-  const [monthlySalary, setMonthlySalary] = useState("");
-  const [jobType, setJobType] = useState("");
-  const [remoteOnsite, setRemoteOnsite] = useState("");
-  const [jobLocation, setJobLocation] = useState("");
-  const [jobDescription, setJobDescription] = useState("");
-  const [aboutCompany, setAboutCompany] = useState("");
-  const [skillsRequired, setSkillsRequired] = useState([]);
+    const navigate = useNavigate();
+    const { id } = useParams();
+    console.log("id", id);
+    const [companyName, setCompanyName] = useState("");
+    const [addLogoURL, setAddLogoURL] = useState("");
+    const [jobPosition, setJobPosition] = useState("");
+    const [monthlySalary, setMonthlySalary] = useState("");
+    const [jobType, setJobType] = useState("");
+    const [remoteOnsite, setRemoteOnsite] = useState("");
+    const [jobLocation, setJobLocation] = useState("");
+    const [jobDescription, setJobDescription] = useState("");
+    const [aboutCompany, setAboutCompany] = useState("");
+    const [skillsRequired, setSkillsRequired] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:4000/jobs/${id}`)
-      .then((response) => {
-        console.log("response", response.data.jobListing);
-        setCompanyName(response.data.jobListing.companyName);
-        setAddLogoURL(response.data.jobListing.addLogoURL);
-        setJobPosition(response.data.jobListing.jobPosition);
-        setMonthlySalary(response.data.jobListing.monthlySalary);
-        setJobType(response.data.jobListing.jobType);
-        setRemoteOnsite(response.data.jobListing.remoteOnsite);
-        setJobLocation(response.data.jobListing.jobLocation);
-        setJobDescription(response.data.jobListing.jobDescription);
-        setAboutCompany(response.data.jobListing.aboutCompany);
-        setSkillsRequired(response.data.jobListing.skillsRequired);
-      })
-      .catch((error) => {
-        console.error("Job posting failed", error);
-        navigate("/login");
-      });
-  }, [id,navigate]);
+    useEffect(() => {
+        axios
+            .get(`${BASEURL}/jobs/${id}`)
+            .then((response) => {
+                console.log("response", response.data.jobListing);
+                setCompanyName(response.data.jobListing.companyName);
+                setAddLogoURL(response.data.jobListing.addLogoURL);
+                setJobPosition(response.data.jobListing.jobPosition);
+                setMonthlySalary(response.data.jobListing.monthlySalary);
+                setJobType(response.data.jobListing.jobType);
+                setRemoteOnsite(response.data.jobListing.remoteOnsite);
+                setJobLocation(response.data.jobListing.jobLocation);
+                setJobDescription(response.data.jobListing.jobDescription);
+                setAboutCompany(response.data.jobListing.aboutCompany);
+                setSkillsRequired(response.data.jobListing.skillsRequired);
+            })
+            .catch((error) => {
+                navigate("/login");
+            });
+    }, [id, navigate]);
 
-  const handleJobTypeChange = (e) => {
-    setJobType(e.target.value);
-  };
-
-  const handleRemoteOnsiteChange = (e) => {
-    setRemoteOnsite(e.target.value);
-  };
-
-  const handleSkillsChange = (e) => {
-    const skills = e.target.value.split(",").map((skill) => skill.trim());
-    setSkillsRequired(skills);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(localStorage.getItem("token"));
-    // Prepare the data to be sent in the POST request
-    const postData = {
-      companyName,
-      addLogoURL,
-      jobPosition,
-      monthlySalary,
-      jobType,
-      remoteOnsite,
-      jobLocation,
-      jobDescription,
-      aboutCompany,
-      skillsRequired,
+    const handleJobTypeChange = (e) => {
+        setJobType(e.target.value);
     };
 
-    // Send the POST request
-    axios
-      .put(`http://localhost:4000/job-posting/${id}`, postData, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
-      .then((response) => {
-        console.log("Job posting successful", response);
-        setAboutCompany("");
-        setAddLogoURL("");
-        setCompanyName("");
-        setJobDescription("");
-        setJobLocation("");
-        setJobPosition("");
-        setJobType("");
-        setMonthlySalary("");
-        setRemoteOnsite("");
-        setSkillsRequired([]);
+    const handleRemoteOnsiteChange = (e) => {
+        setRemoteOnsite(e.target.value);
+    };
 
-        // Handle any success response if needed
-        toast.success("Job Updated Successfully", {
-          position: "top-center",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-        setTimeout(() => {
-          navigate("/");
-        }, 2000);
-      })
-      .catch((error) => {
-        if (error.response.status === 401) {
-          toast.error("Unauthorized Access. Redirecting to home page", {
-            position: "top-center",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-          localStorage.clear();
-          setTimeout(() => {
-            navigate("/");
-          }, 2000);
-          return;
-        }
+    const handleSkillsChange = (e) => {
+        const skills = e.target.value.split(",").map((skill) => skill);
+        setSkillsRequired(skills);
+    };
 
-        toast.error("Job Update Failed. Redirecting to home page", {
-          position: "top-center",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-        setTimeout(() => {
-          navigate("/");
-        }, 2000);
-      });
-  };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(localStorage.getItem("token"));
+        // Prepare the data to be sent in the POST request
+        const postData = {
+            companyName,
+            addLogoURL,
+            jobPosition,
+            monthlySalary,
+            jobType,
+            remoteOnsite,
+            jobLocation,
+            jobDescription,
+            aboutCompany,
+            skillsRequired: skillsRequired.map((skill) => skill.trim()),
+        };
 
-  const cancelUpdate = () => {
-    navigate("/");
-  };
+        // Send the POST request
+        axios
+        .put(`${BASEURL}/job-posting/${id}`, postData, {
+            headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token"),
+                },
+            })
+            .then((response) => {
+                console.log("Job posting successful", response);
+                setAboutCompany("");
+                setAddLogoURL("");
+                setCompanyName("");
+                setJobDescription("");
+                setJobLocation("");
+                setJobPosition("");
+                setJobType("");
+                setMonthlySalary("");
+                setRemoteOnsite("");
+                setSkillsRequired([]);
 
-  return (
-    <div className="edit_job">
-      <div className="edit_job_left">
-        <h1>Edit Job</h1>
-        <form className="job_form" onSubmit={handleSubmit}>
-          <div className="job_input">
-            <label htmlFor="companyName">Company Name</label>
-            <input
-              type="text"
-              placeholder="Company Name"
-              value={companyName}
-              onChange={(e) => setCompanyName(e.target.value)}
-            />
-          </div>
-          <div className="job_input">
-            <label htmlFor="addLogoURL">Logo URL</label>
-            <input
-              type="text"
-              placeholder="Logo URL"
-              value={addLogoURL}
-              onChange={(e) => setAddLogoURL(e.target.value)}
-            />
-          </div>
-          <div className="job_input">
-            <label htmlFor="jobPosition">Job Position</label>
-            <input
-              type="text"
-              placeholder="Job Position"
-              value={jobPosition}
-              onChange={(e) => setJobPosition(e.target.value)}
-            />
-          </div>
-          <div className="job_input">
-            <label htmlFor="monthlySalary">Monthly Salary</label>
-            <input
-              type="number"
-              placeholder="Monthly Salary"
-              value={monthlySalary}
-              onChange={(e) => setMonthlySalary(e.target.value)}
-            />
-          </div>
-          <div className="job_input">
-            <label htmlFor="jobType">Job Type</label>
-            <select value={jobType} onChange={handleJobTypeChange}>
-              <option value="">Select Job Type</option>
-              <option value="Internship">Internship</option>
-              <option value="Full Time">Full Time</option>
-            </select>
-          </div>
-          <div className="job_input">
-            <label htmlFor="remoteOnsite">Remote/Onsite</label>
-            <select value={remoteOnsite} onChange={handleRemoteOnsiteChange}>
-              <option value="">Select Remote/Onsite</option>
-              <option value="Remote">Remote</option>
-              <option value="In Office">In Office</option>
-            </select>
-          </div>
+                // Handle any success response if needed
+                toast.success("Job Updated Successfully", {
+                    position: "top-center",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+                setTimeout(() => {
+                    navigate("/");
+                }, 2000);
+            })
+            .catch((error) => {
+                if (error.response.status === 401) {
+                    toast.error("Unauthorized Access. Redirecting to home page", {
+                        position: "top-center",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                    localStorage.clear();
+                    setTimeout(() => {
+                        navigate("/");
+                    }, 2000);
+                    return;
+                }
 
-          <div className="job_input">
-            <label htmlFor="jobLocation">Job Location</label>
-            <input
-              type="text"
-              placeholder="Job Location"
-              value={jobLocation}
-              onChange={(e) => setJobLocation(e.target.value)}
-              disabled={remoteOnsite === "Remote"}
-            />
-          </div>
+                toast.error("Job Update Failed. Redirecting to home page", {
+                    position: "top-center",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+                setTimeout(() => {
+                    navigate("/");
+                }, 2000);
+            });
+    };
 
-          <div className="job_input">
-            <label htmlFor="jobDescription">Job Description</label>
-            <textarea
-              placeholder="Job Description"
-              value={jobDescription}
-              onChange={(e) => setJobDescription(e.target.value)}
-            ></textarea>
-          </div>
-          <div className="job_input">
-            <label htmlFor="aboutComapany">About Company</label>
-            <textarea
-              placeholder="About Company"
-              value={aboutCompany}
-              onChange={(e) => setAboutCompany(e.target.value)}
-            ></textarea>
-          </div>
-          <div className="job_input">
-            <label htmlFor="skillsRequired">Skills Required</label>
-            <input
-              type="text"
-              placeholder="Skills Required"
-              value={skillsRequired}
-              onChange={handleSkillsChange}
-            />
-          </div>
-          <div className="job_buttons">
-            <button onClick={cancelUpdate} className="cancel_updateJob">
-              Cancel
-            </button>
-            <button type="submit" className="update_job_button">
-              Update
-            </button>
-          </div>
-        </form>
-      </div>
-      <div className="edit_job_right">
-        <h1>Recruiters edit Job details here</h1>
-      </div>
-      <ToastContainer />
-    </div>
-  );
+    const cancelUpdate = () => {
+        navigate("/");
+    };
+
+    return (
+        <div className="edit_job">
+            <div className="edit_job_left">
+                <h1>Edit Job</h1>
+                <form className="job_form" onSubmit={handleSubmit}>
+                    <div className="job_input">
+                        <label htmlFor="companyName">Company Name</label>
+                        <input
+                            type="text"
+                            placeholder="Company Name"
+                            value={companyName}
+                            onChange={(e) => setCompanyName(e.target.value)}
+                        />
+                    </div>
+                    <div className="job_input">
+                        <label htmlFor="addLogoURL">Logo URL</label>
+                        <input
+                            type="text"
+                            placeholder="Logo URL"
+                            value={addLogoURL}
+                            onChange={(e) => setAddLogoURL(e.target.value)}
+                        />
+                    </div>
+                    <div className="job_input">
+                        <label htmlFor="jobPosition">Job Position</label>
+                        <input
+                            type="text"
+                            placeholder="Job Position"
+                            value={jobPosition}
+                            onChange={(e) => setJobPosition(e.target.value)}
+                        />
+                    </div>
+                    <div className="job_input">
+                        <label htmlFor="monthlySalary">Monthly Salary</label>
+                        <input
+                            type="number"
+                            placeholder="Monthly Salary"
+                            value={monthlySalary}
+                            onChange={(e) => setMonthlySalary(e.target.value)}
+                        />
+                    </div>
+                    <div className="job_input">
+                        <label htmlFor="jobType">Job Type</label>
+                        <select value={jobType} onChange={handleJobTypeChange}>
+                            <option value="">Select Job Type</option>
+                            <option value="Internship">Internship</option>
+                            <option value="Full Time">Full Time</option>
+                        </select>
+                    </div>
+                    <div className="job_input">
+                        <label htmlFor="remoteOnsite">Remote/Onsite</label>
+                        <select value={remoteOnsite} onChange={handleRemoteOnsiteChange}>
+                            <option value="">Select Remote/Onsite</option>
+                            <option value="Remote">Remote</option>
+                            <option value="In Office">In Office</option>
+                        </select>
+                    </div>
+
+                    <div className="job_input">
+                        <label htmlFor="jobLocation">Job Location</label>
+                        <input
+                            type="text"
+                            placeholder="Job Location"
+                            value={jobLocation}
+                            onChange={(e) => setJobLocation(e.target.value)}
+                            disabled={remoteOnsite === "Remote"}
+                        />
+                    </div>
+
+                    <div className="job_input">
+                        <label htmlFor="jobDescription">Job Description</label>
+                        <textarea
+                            placeholder="Job Description"
+                            value={jobDescription}
+                            onChange={(e) => setJobDescription(e.target.value)}
+                        ></textarea>
+                    </div>
+                    <div className="job_input">
+                        <label htmlFor="aboutComapany">About Company</label>
+                        <textarea
+                            placeholder="About Company"
+                            value={aboutCompany}
+                            onChange={(e) => setAboutCompany(e.target.value)}
+                        ></textarea>
+                    </div>
+                    <div className="job_input">
+                        <label htmlFor="skillsRequired">Skills Required</label>
+                        <input
+                            type="text"
+                            placeholder="Skills Required"
+                            value={skillsRequired}
+                            onChange={handleSkillsChange}
+                        />
+                    </div>
+                    <div className="job_buttons">
+                        <button onClick={cancelUpdate} className="cancel_updateJob">
+                            Cancel
+                        </button>
+                        <button type="submit" className="update_job_button">
+                            Update
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div className="edit_job_right">
+                <h1>Recruiters edit Job details here</h1>
+            </div>
+            <ToastContainer />
+        </div>
+    );
 };
 
 export default EditJob;

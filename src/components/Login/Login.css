@@ -69,6 +69,7 @@
     font-weight: 700;
     height: 7vh;
     width: 15vw;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 650px) and (min-width: 250px) {
