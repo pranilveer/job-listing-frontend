@@ -1,3 +1,3 @@
-const BASEURL = "https://job-listing-backend.onrender.com";
+const BASEURL = "https://joblisting-app.onrender.com";
 
 export default BASEURL;
