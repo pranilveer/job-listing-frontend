@@ -61,9 +61,14 @@
     font-weight: 700;
     height: 7vh;
     width: 15vw;
+    min-width: 100px;
   }
   
-  .register_page_right > img {
+  .register_page_right{
+    background-image: url("../../assets/images/userPageImage.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
     height: 100vh;
     width: 45vw;
   }
@@ -74,4 +79,42 @@
 
   .error-message{
     font-size: 2rem;
+  }
+
+  @media screen and (max-width: 636px){
+    .register_page_right{
+      display: none;
+    }
+    .register_page_left{
+      width: 100vw;
+    }
+    .register_title {
+      width: 80vw;
+    }
+    
+    .register_form {
+      width: 80vw;
+    }
+    
+    .register_form > div > input {
+      height: 8vh;
+      width: 70vw;
+    }
+    .register_footer {
+      width: 80vw;
+      gap: 2vh;
+      align-items: center;
+    }
+  }
+
+  @media screen and (max-width: 336px){
+    #register_create_account {
+      font-size: 2vh;
+      font-weight: 700;
+      height: 6vh;
+    }
+    .register_title {
+      margin-top: 2vh;
+      font-size: 0.9rem;
+    }
   }

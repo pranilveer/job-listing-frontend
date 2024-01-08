@@ -6,16 +6,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    -webkit-box-shadow: 0px 0px 21px 5px rgba(224, 13, 55, 0.58);
-    -moz-box-shadow: 0px 0px 21px 5px rgba(224, 13, 55, 0.58);
-    box-shadow: 0px 0px 21px 5px rgba(224, 13, 55, 0.58);
+    -webkit-box-shadow: 0px 0px 22px 2px rgba(255, 32, 32, 0.25);
+    -moz-box-shadow: 0px 0px 22px 2px rgba(255, 32, 32, 0.25);
+    box-shadow: 0px 0px 22px 2px rgba(255, 32, 32, 0.25);
 }
 
 .job_left_component {
     height: 100%;
     width: 36vw;
     display: flex;
-    /* justify-content: space-evenly; */
+    justify-content: space-evenly;
     gap: 1vw;
     align-items: center;
 }
@@ -71,7 +71,7 @@
     color: #9C9C9C;
 }
 
-.job_right_content {
+.job_right_component {
     height: 100%;
     width: 40vw;
     gap: 2vh;
@@ -86,16 +86,21 @@
     justify-content: flex-end;
     align-items: center;
     flex-wrap: wrap;
+    overflow: scroll;
 }
 
-/* .job_right_upper > span{
+.job_right_upper::-webkit-scrollbar {
+    display: none;
+}
+
+.job_right_upper>span {
     height: 3vh;
     width: 12vw;
     padding: 1vh 2vw;
     background-color: #FFEEEE;
     margin: 1vh;
     font-weight: 600;
-} */
+}
 
 .requiredSkills {
     height: 3vh;
@@ -124,4 +129,64 @@
     font-weight: 600;
     font-size: 2.5vh;
     margin-right: 1vw;
+}
+
+@media screen and (max-width:900px) and (min-width: 600px) {
+    .second_div {
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+    .third_div >span{
+        font-size: 0.8rem;
+    }
+
+    .job_right_lower>button {
+        height: 4vh;
+        width: 10vw;
+        font-size: 1.5vh;
+    }
+}
+
+
+@media screen and (max-width:600px) and (min-width: 400px) {
+    .second_div {
+        font-size: 0.6rem;
+        font-weight: 600;
+    }
+    .third_div >span{
+        font-size: 0.6rem;
+    }
+
+    .job_right_lower>button {
+        height: 4vh;
+        width: 10vw;
+        font-size: 1.2vh;
+    }
+    .requiredSkills {
+        font-size: 9px;
+    }
+}
+
+@media screen and (max-width:400px) and (min-width: 200px) {
+    .second_div {
+        font-size: 0.5rem;
+        font-weight: 500;
+    }
+    .third_div >span{
+        font-size: 0.5rem;
+    }
+
+    .job_right_lower>button {
+        height: 4vh;
+        width: 10vw;
+        font-size: 1vh;
+    }
+    .requiredSkills {
+        font-size: 8px;
+    }
+    .second_div_text>img{
+        height: 0.8rem;
+        width: 0.8rem;
+        margin-right: 0.2rem;
+    }
 }

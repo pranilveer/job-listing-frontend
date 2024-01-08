@@ -124,7 +124,7 @@ const AddJob = () => {
       <div className="add_job_left">
         <h1>Add Job</h1>
         <form className="job_form" onSubmit={handleSubmit}>
-          <div className="job_input">
+          <div className="add_job_input">
             <label htmlFor="companyName">Company Name</label>
             <input
               type="text"
@@ -133,7 +133,7 @@ const AddJob = () => {
               onChange={(e) => setCompanyName(e.target.value)}
             />
           </div>
-          <div className="job_input">
+          <div className="add_job_input">
             <label htmlFor="addLogoURL">Logo URL</label>
             <input
               type="text"
@@ -142,7 +142,7 @@ const AddJob = () => {
               onChange={(e) => setAddLogoURL(e.target.value)}
             />
           </div>
-          <div className="job_input">
+          <div className="add_job_input">
             <label htmlFor="jobPosition">Job Position</label>
             <input
               type="text"
@@ -151,7 +151,7 @@ const AddJob = () => {
               onChange={(e) => setJobPosition(e.target.value)}
             />
           </div>
-          <div className="job_input">
+          <div className="add_job_input">
             <label htmlFor="monthlySalary">Monthly Salary</label>
             <input
               type="number"
@@ -160,7 +160,7 @@ const AddJob = () => {
               onChange={(e) => setMonthlySalary(e.target.value)}
             />
           </div>
-          <div className="job_input">
+          <div className="add_job_input">
             <label htmlFor="jobType">Job Type</label>
             <select value={jobType} onChange={handleJobTypeChange}>
               <option value="">Select Job Type</option>
@@ -168,7 +168,7 @@ const AddJob = () => {
               <option value="Full Time">Full Time</option>
             </select>
           </div>
-          <div className="job_input">
+          <div className="add_job_input">
             <label htmlFor="remoteOnsite">Remote/Onsite</label>
             <select value={remoteOnsite} onChange={handleRemoteOnsiteChange}>
               <option value="">Select Remote/Onsite</option>
@@ -177,7 +177,7 @@ const AddJob = () => {
             </select>
           </div>
 
-          <div className="job_input">
+          <div className="add_job_input">
             <label htmlFor="jobLocation">Job Location</label>
             <input
               type="text"
@@ -188,7 +188,7 @@ const AddJob = () => {
             />
           </div>
 
-          <div className="job_input">
+          <div className="add_job_input">
             <label htmlFor="jobDescription">Job Description</label>
             <textarea
               placeholder="Job Description"
@@ -196,7 +196,7 @@ const AddJob = () => {
               onChange={(e) => setJobDescription(e.target.value)}
             ></textarea>
           </div>
-          <div className="job_input">
+          <div className="add_job_input">
             <label htmlFor="aboutComapany">About Company</label>
             <textarea
               placeholder="About Company"
@@ -204,7 +204,7 @@ const AddJob = () => {
               onChange={(e) => setAboutCompany(e.target.value)}
             ></textarea>
           </div>
-          <div className="job_input">
+          <div className="add_job_input">
             <label htmlFor="skillsRequired">Skills Required</label>
             <input
               type="text"

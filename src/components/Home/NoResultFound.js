@@ -1,5 +1,5 @@
 import React from "react";
-import "./NoResultsFound.css";
+import "./NoResultFound.css";
 
 const NoResultsFound = () => {
   return (

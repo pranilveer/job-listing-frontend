@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./register.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import userPageImage from "../../assets/images/userPageImage.png";
+// import userPageImage from "../../assets/images/userPageImage.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useJobContext from "../../hooks/useJobContext";
@@ -222,7 +222,7 @@ const Register = () => {
         </div>
       </div>
       <div className="register_page_right">
-        <img src={`${userPageImage}`} alt="" />
+        {/* <img src={`${userPageImage}`} alt="" /> */}
       </div>
       <ToastContainer />
     </div>

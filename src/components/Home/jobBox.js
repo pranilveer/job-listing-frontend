@@ -19,7 +19,7 @@ const JobBox = ( {job} ) => {
     };
 
     return (
-        <div className="jobBox_contaier">
+        <div className="jobBox_container">
             <div className="job_left_component">
                 <div className="company_logo">
                     <img src={job.addLogoURL} alt="groupIcon" />

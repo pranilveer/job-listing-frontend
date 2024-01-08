@@ -11,18 +11,17 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
   margin: 0 5vw;
 }
 
-.job_input {
+.add_job_input {
   display: flex;
   height: 8vh;
   justify-content: space-between;
   width: 50vw;
 }
 
-.job_input>input {
+.add_job_input>input {
   align-self: flex-start;
   border: 1px solid #c2c2c2;
   border-radius: 1vh;
@@ -32,27 +31,27 @@
   width: 30vw;
 }
 
-.job_input>select,
-.job_input>textarea {
+.add_job_input>select,
+.add_job_input>textarea {
   border: 1px solid #c2c2c2;
   border-radius: 1vh;
   color: #c2c2c2;
   padding: 5px;
 }
 
-.job_input>textarea {
+.add_job_input>textarea {
   height: 5vh;
   resize: none;
   width: 30vw;
 }
 
-.job_input>select {
+.add_job_input>select {
   height: 6vh;
   margin-right: 16vw;
   width: 15vw;
 }
 
-.job_input>label {
+.add_job_input>label {
   font-size: 1.2rem;
   font-weight: 600;
 }
@@ -104,7 +103,7 @@
 }
 
 @media screen and (max-width: 770px) and (min-width: 650px) {
-  .job_input>label {
+  .add_job_input>label {
     font-size: 1rem;
     font-weight: 600;
   }
@@ -123,40 +122,40 @@
   }
 
   .add_job_left {
-    width: 100vw;
+    width: 80vw;
   }
 
-  .job_input>label {
+  .add_job_input>label {
     font-size: 1.2rem;
     font-weight: 600;
   }
 
-  .job_input {
+  .add_job_input {
     display: flex;
     height: 7vh;
     width: 80vw;
   }
 
-  .job_input>select,
-  .job_input>textarea {
+  .add_job_input>select,
+  .add_job_input>textarea {
     border: 1px solid #c2c2c2;
     border-radius: 1vh;
     color: #c2c2c2;
     padding: 5px;
   }
 
-  .job_input>textarea {
+  .add_job_input>textarea {
     height: 5vh;
     width: 49vw;
   }
 
-  .job_input>select {
+  .add_job_input>select {
     height: 6vh;
     margin-right: 36vw;
     width: 15vw;
   }
 
-  .job_input>input {
+  .add_job_input>input {
     height: 5vh;
     padding: 2px;
     width: 50vw;
@@ -185,38 +184,38 @@
     width: 100vw;
   }
 
-  .job_input>label {
+  .add_job_input>label {
     font-size: 1rem;
     font-weight: 600;
   }
 
-  .job_input {
+  .add_job_input {
     display: flex;
     height: 7vh;
     width: 80vw;
   }
 
-  .job_input>select,
-  .job_input>textarea {
+  .add_job_input>select,
+  .add_job_input>textarea {
     border: 1px solid #c2c2c2;
     border-radius: 1vh;
     color: #c2c2c2;
     padding: 5px;
   }
 
-  .job_input>textarea {
+  .add_job_input>textarea {
     height: 4vh;
     width: 44vw;
   }
 
-  .job_input>select {
+  .add_job_input>select {
     height: 5vh;
     margin-right: 31vw;
     width: 15vw;
     font-size: 0.8rem;
   }
 
-  .job_input>input {
+  .add_job_input>input {
     height: 5vh;
     padding: 2px;
     width: 45vw;
@@ -249,38 +248,39 @@
     width: 100vw;
   }
 
-  .job_input>label {
+  .add_job_input>label {
     font-size: 0.8rem;
     font-weight: 600;
+    margin-left: 0;
   }
 
-  .job_input {
+  .add_job_input {
     height: 7vh;
     width: 90vw;
   }
 
-  .job_input>select,
-  .job_input>textarea {
+  .add_job_input>select,
+  .add_job_input>textarea {
     border: 1px solid #c2c2c2;
     border-radius: 1vh;
     color: #c2c2c2;
     padding: 5px;
   }
 
-  .job_input>textarea {
+  .add_job_input>textarea {
     height: 3vh;
     width: 44vw;
     font-size: 0.8rem;
   }
 
-  .job_input>select {
+  .add_job_input>select {
     height: 4vh;
     margin-right: 27vw;
     width: 20vw;
     font-size: 0.8rem;
   }
 
-  .job_input>input {
+  .add_job_input>input {
     height: 4vh;
     padding: 2px;
     width: 45vw;

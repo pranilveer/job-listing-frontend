@@ -1,11 +1,11 @@
-.edit_job{
+.edit_job {
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
 }
 
-.edit_job_left{
+.edit_job_left {
     height: 100vh;
     width: 55vw;
     display: flex;
@@ -15,11 +15,13 @@
     margin: 0 5vw;
 }
 
-.job_form{
+.job_form {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    width: 50vw;
+    width: 80vw;
+    justify-content: center;
+    align-items: center;
 }
 
 .job_input {
@@ -29,7 +31,7 @@
     justify-content: space-between;
 }
 
-.job_input > input {
+.job_input>input {
     height: 5vh;
     width: 30vw;
     align-self: flex-start;
@@ -39,12 +41,12 @@
     padding: 5px;
 }
 
-.job_input > label {
+.job_input>label {
     font-weight: 600;
-    font-size: 1.5rem;
+    font-size: 1rem;
 }
 
-.job_input > select {
+.job_input>select {
     height: 6vh;
     width: 15vw;
     border: #C2C2C2 1px solid;
@@ -54,7 +56,7 @@
     margin-right: 16vw;
 }
 
-.job_input > textarea {
+.job_input>textarea {
     height: 5vh;
     width: 30vw;
     resize: none;
@@ -64,32 +66,63 @@
     padding: 5px;
 }
 
-.edit_job_right{
-    /* background-image: url("../../assets/addJobPage/addJob.png"); */
+.edit_job_right {
+    background-image: url("../../assets/images/addJobImage.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     height: 100vh;
     width: 45vw;
     color: white;
 }
 
-.cancel_updateJob{
-height: 5.5vh;
+
+.cancel_updateJob {
+    height: 5.5vh;
     width: 12vw;
     background-color: #C2C2C2;
     border-radius: 1vh;
     border: none;
     color: white;
-    font-size: 1.5rem;
+    font-size: 1rem;
     margin: 1vh 0 0 0;
 }
 
-.update_job_button{
-height: 5.5vh;
+.update_job_button {
+    height: 5.5vh;
     width: 12vw;
     background-color: #ED5353;
     border-radius: 1vh;
     border: none;
     color: white;
-    font-size: 1.5rem;
+    font-size: 1rem;
     margin: 1vh 0 0 1vh;
     cursor: pointer;
+}
+
+@media screen and (max-width: 660px) {
+    .edit_job_right {
+        display: none;
+    }
+
+    .edit_job_left {
+        width: 100vw;
+    }
+
+    .job_buttons {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50vw;
+        font-size: 0.4rem;
+        margin-left: 10vw;
+    }
+
+    .job_input {
+        width: 80vw;
+    }
+    .cancel_updateJob, .update_job_button{
+            min-width: 12vh;
+            font-size: 1rem;
+        }
 }

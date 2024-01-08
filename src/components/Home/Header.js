@@ -22,10 +22,6 @@ const Header = () => {
     return (
         <div className="header">
             <div className="header_title">jobFinder</div>
-            {/* <div className="header_buttons">
-                <div className="header_login" onClick={loginPage}>Login</div>
-                <div className="header_register" onClick={signupPage}>Register</div>
-            </div> */}
             {loggedIn ? (
                 <div className="user_icon">
                     <button onClick={logout}> Logout </button>
@@ -33,9 +29,9 @@ const Header = () => {
                     <img src="https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250" alt="" />
                 </div>
             ) : (
-                <div className="signup__buttons">
-                    <button className="header__login" onClick={loginPage}> Login </button>
-                    <button className="header__register" onClick={signupPage}> Register </button>
+                <div className="header_buttons">
+                    <button className="header_login" onClick={loginPage}> Login </button>
+                    <button className="header_register" onClick={signupPage}> Register </button>
                 </div>
             )}
         </div>

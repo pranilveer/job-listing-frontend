@@ -74,8 +74,8 @@ const EditJob = () => {
 
         // Send the POST request
         axios
-        .put(`${BASEURL}/job-posting/${id}`, postData, {
-            headers: {
+            .put(`${BASEURL}/job-posting/${id}`, postData, {
+                headers: {
                     Authorization: "Bearer " + localStorage.getItem("token"),
                 },
             })

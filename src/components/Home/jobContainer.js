@@ -2,7 +2,7 @@ import React from 'react'
 import "./jobContainer.css"
 import JobBox from './jobBox'
 import useJobContext from "../../hooks/useJobContext";
-import NoResultsFound from "./NoResultsFound";
+import NoResultsFound from "./NoResultFound";
 import Loading from "../Loading/Loading";
 
 const JobContainer = () => {

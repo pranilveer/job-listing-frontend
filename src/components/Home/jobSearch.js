@@ -94,7 +94,7 @@ const JobSearch = () => {
                 </div>
                 {selectedSkills.length > 0 && (
                     <button
-                        className="clear__skills"
+                        className="clear_skills"
                         onClick={clearSkills}
                     >
                         Clear
