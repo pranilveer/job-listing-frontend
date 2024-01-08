@@ -57,7 +57,7 @@
     gap: 0.5vw;
   }
   
-  .job__details__second__section {
+  .job_details_second_section {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -67,13 +67,13 @@
     margin-right: 2vw;
   }
   
-  .job__details__second__section > span {
+  .job_details_second_section > span {
     font-size: 8vh;
     font-weight: 600;
     color: #333333;
   }
   
-  .job__details__second__section > button {
+  .job_details_second_section > button {
     height: 6vh;
     width: 10vw;
     background-color: #ED5353;
@@ -100,12 +100,11 @@
   
   .job__details__fourth__section {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     height: 8vh;
-    width: 70vw;
-    margin-left: 2vw;
-    margin-right: 2vw;
+    width: 60vw;
+    margin: auto;
   }
   
   .job__details__fourth__section__left {
@@ -206,3 +205,30 @@
     margin-left: 2vw;
     margin-right: 2vw;
   }
+
+@media screen and (max-width:500px) {
+  
+  .job_details_second_section > span {
+    font-size: 5vh;
+    font-weight: 700;
+  }
+  
+  .job_details_second_section > button {
+    height: 6vh;
+    width: 10vw;
+    background-color: #ED5353;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 2vh;
+    font-weight: 600;
+    margin-right: 5vw;
+  }
+}
+
+.job__details__fifth__section>h1,
+.job__details__sixth__section>h1,
+.job__details__seventh__section>h1,
+.job__details__eighth__section>h1{
+  font-size: 1.5rem;
+}

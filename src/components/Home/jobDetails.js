@@ -57,7 +57,7 @@ const JobDetails = () => {
                             <span>.</span>
                             <span>{jobDetails.jobType}</span>
                         </div>
-                        <div className="job__details__second__section">
+                        <div className="job_details_second_section">
                             <span>{jobDetails.companyName}</span>
                             {loggedIn && <button onClick={getJobDetails}>Edit Job</button>}
                         </div>
